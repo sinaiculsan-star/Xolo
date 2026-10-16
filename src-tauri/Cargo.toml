@@ -1,0 +1,18 @@
+[package]
+name = "xolo"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+name = "xolo_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["macos-private-api", "tray-icon"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+tauri-nspanel = { git = "https://github.com/ahkohd/tauri-nspanel", rev = "ef6e3090a6083c653955ca0b6e7f6c6ae1453d40" }
+objc2-app-kit = { version = "0.3", features = ["NSEvent", "NSWindow", "NSResponder"] }
